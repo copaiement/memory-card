@@ -1,0 +1,1 @@
+// build the main page of the game, made of multiple cards

@@ -1,5 +1,7 @@
 import './App.css'
 
+// build score state here
+
 function App() {
 
   return (

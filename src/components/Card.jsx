@@ -1,0 +1,1 @@
+// build a car to display an image and text about the image
