@@ -1,0 +1,5 @@
+having an issue with getColors.then()
+
+.then functions don't work out side of async call.
+
+when functions are updated to call getOneColor, calls are made endlessly

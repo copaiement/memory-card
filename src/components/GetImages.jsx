@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 
 // helper functions
 function randRGB() {
-  return `${getRand(0, 255)},${getRand(0, 255)},${getRand(0, 255)}`;
+  return `rgb(${getRand(0, 255)},${getRand(0, 255)},${getRand(0, 255)})`;
 }
 
 function getRand(min, max) {
@@ -23,6 +23,24 @@ function getRand(min, max) {
   return Math.floor(Math.random() * (max - min) + min); 
 }
 
+async function fetchOneColor() {
+  let response = await fetch(`https://www.thecolorapi.com/id?rgb=${randRGB()}`);
+  let color = await response.json();
+  return [color.image.bare, color.name.value];
+}
+
+async function fetchColors(qty) {
+  let colorArray = [];
+  for (let i = 0; i < qty; i++) {
+    fetchOneColor().then((color) => {
+      colorArray.push(color);
+    })
+  }
+  
+  return colorArray;
+}
+
+// main component
 export function GetColors({ qty }) {
   const [colors, setColors] = useState([]);
 
@@ -35,40 +53,10 @@ export function GetColors({ qty }) {
         }
       })
     return () => mounted = false;
-  })
+  }, [qty])
+  console.log(colors);
+  return (
+    <div>TEST</div>
+  )
 }
 
-async function fetchOneColor() {
-  let response = await fetch(`https://www.thecolorapi.com/id?rgb=${randRGB()}`);
-  let color = await response.json();
-
-  return color;
-}
-
-function fetchColors(qty) {
-  let colorArray = [];
-  for (let i = 0; i < qty; i++) {
-    fetchOneColor().then((color) => {
-      colorArray.push(color);
-    })
-  }
-
-  return colorArray;
-}
-
-async function getWeather(loc) {
-  toggleLoader();
-  let response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=400f15b7cc534eb7850174113230505&q=${loc}&days=7&aqi=no&alerts=no`, { mode: 'cors' });
-  let weather = await response.json();
-  return weather;
-}
-
-function updatePage(loc) {
-  getWeather(loc).then((weather) => {
-    console.log(weather);
-    buildPage(weather);
-  })
-    .catch(() => {
-      location.textContent = 'Location Not Found!';
-    });
-}

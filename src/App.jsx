@@ -1,13 +1,15 @@
 import './App.css'
 import { useState } from 'react'
-
+import { GetColors } from './components/GetImages'
 // build score state here
 
 function App() {
 
   return (
     <>
-      <div>Memory Card</div>
+      <GetColors
+        qty={10}
+      />
     </>
   )
 }
