@@ -1,14 +1,28 @@
 import './App.css'
 import { useState } from 'react'
-import { GetColors } from './components/GetImages'
+import { fetchColors } from './utils/getImages'
+import { NewGame } from './components/NewGame';
+import { Loader } from './components/Loader';
 // build score state here
 
 function App() {
+  const [colors, setColors] = useState([]);
+  const [currScore, setCurrScore] = useState(0);
+  const [hiScore, setHiScore] = useState(0);
+
+  function updateColorArr(qty) {
+    //let newColors = fetchColors(qty);
+    setColors(fetchColors(qty))
+    console.log(colors);
+  }
 
   return (
     <>
-      <GetColors
-        qty={10}
+      <Loader/>
+      <NewGame
+        easyFxn={() => updateColorArr(5)}
+        medFxn={() => updateColorArr(10)}
+        hardFxn={() => updateColorArr(15)}
       />
     </>
   )

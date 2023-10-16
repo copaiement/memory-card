@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { toggleLoader } from "./toggleloader";
 
 // Use the color API to get random colors
 // https://www.thecolorapi.com/id?rgb=rgb(255,0,0)
@@ -29,34 +29,21 @@ async function fetchOneColor() {
   return [color.image.bare, color.name.value];
 }
 
-async function fetchColors(qty) {
+export function fetchColors(qty) {
+  toggleLoader();
   let colorArray = [];
   for (let i = 0; i < qty; i++) {
     fetchOneColor().then((color) => {
       colorArray.push(color);
     })
   }
+
+  setTimeout(() => {
+    console.log('delay')
+    toggleLoader();
+  }, 1000)
   
   return colorArray;
 }
 
-// main component
-export function GetColors({ qty }) {
-  const [colors, setColors] = useState([]);
-
-  useEffect(() => {
-    let mounted = true;
-    fetchColors(qty)
-      .then(newColors => {
-        if (mounted) {
-          setColors(newColors)
-        }
-      })
-    return () => mounted = false;
-  }, [qty])
-  console.log(colors);
-  return (
-    <div>TEST</div>
-  )
-}
 

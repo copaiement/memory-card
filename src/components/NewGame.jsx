@@ -1,9 +1,3 @@
-// build the main page of the game, made of multiple cards
-
-export function Gameboard({ list }) {
-
-}
-
 export function NewGame({ easyFxn, medFxn, hardFxn}) {
   return (
     <div className="newGameContainer">
