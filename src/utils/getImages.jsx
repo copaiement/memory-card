@@ -1,4 +1,3 @@
-import { toggleLoader } from "./domFunctions";
 
 // Use the color API to get random colors
 // https://www.thecolorapi.com/id?rgb=rgb(255,0,0)

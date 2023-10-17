@@ -1,3 +1,5 @@
+
+/* LOADER STYLE */
 .loaderContainer{
   position: absolute;
   top: 0;
@@ -24,6 +26,7 @@
   100% { transform: rotate(360deg); }
 }
 
+/* POINTER SETUP */
 .card {
   cursor: pointer;
 }
@@ -35,3 +38,56 @@ img, .cardTitle {
 .hidden {
   display: none;
 }
+
+/* GAME PAGE STYLE */
+
+/* GAMEBOARD STYLE */
+.gameboard {
+  padding: 16px;
+  display: grid;
+  gap: 16px;
+}
+
+.easy {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.medium {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.hard {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.endless {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* CARD STYLE */
+.card {
+  background-color: #d3d3d3;
+  border: 2px solid rgb(112, 112, 112);
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px blue;
+  display: flex;
+  /* aspect-ratio: 1; */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  gap: 8px;
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px white;
+}
+
+.cardTitle {
+  font-size: 18px;
+  padding-top: 8px;
+}
+

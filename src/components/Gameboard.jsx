@@ -1,8 +1,8 @@
 import { Card } from "./Card"
 
-export function Gameboard({ piecelist, handleClick }) {
+export function Gameboard({ piecelist, difficulty, handleClick }) {
   return (
-    <div className="gameboard">
+    <div className={'gameboard ' + difficulty}>
       {piecelist.map((item) => (
         <Card
           key={item[2]}

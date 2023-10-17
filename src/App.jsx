@@ -9,6 +9,7 @@ import { toggleLoader } from './utils/domFunctions';
 
 function App() {
   const [colors, setColors] = useState([]);
+  const [difficulty, setDifficulty] = useState();
   const [currScore, setCurrScore] = useState(0);
   const [hiScore, setHiScore] = useState(
     localStorage.getItem('hiScore') || 0
@@ -35,19 +36,31 @@ function App() {
 
   }
 
+  function handleNG(difficulty) {
+    setDifficulty(difficulty)
+    if (difficulty === 'easy') {
+      updateColorArr(5);
+    } else if (difficulty === 'medium') {
+      updateColorArr(10);
+    } else if (difficulty === 'hard') {
+      updateColorArr(15);
+    }
+  }
+
   return (
     <>
       <Loader/>
       {status === 'load' ? 
         <NewGame
-        easyFxn={() => updateColorArr(5)}
-        medFxn={() => updateColorArr(10)}
-        hardFxn={() => updateColorArr(15)}
+        easyFxn={() => handleNG('easy')}
+        medFxn={() => handleNG('medium')}
+        hardFxn={() => handleNG('hard')}
         />
       :
         <GamePage
           piecelist={colors}
           score={[currScore, hiScore]}
+          difficulty={difficulty}
           handleClick={handleCardClick}
         />
       }
