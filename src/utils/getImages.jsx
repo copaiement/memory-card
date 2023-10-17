@@ -26,11 +26,16 @@ function makeId(colorName) {
   return colorName.replace(/\s/g, '').toLowerCase();
 }
 
-// new method
+// fetch as an object
 async function fetchOneColor(rgb) {
   let res = await fetch(`https://www.thecolorapi.com/id?rgb=${rgb}`)
   let colorFull = await res.json();
-  return [colorFull.image.bare, colorFull.name.value, makeId(colorFull.name.value)];
+  return {
+    img: colorFull.image.bare,
+    name: colorFull.name.value,
+    id: makeId(colorFull.name.value),
+    clicked: false
+  };
 }
 
 export async function fetchAllColors(qty) {

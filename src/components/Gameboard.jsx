@@ -1,14 +1,15 @@
 import { Card } from "./Card"
 
 export function Gameboard({ piecelist, difficulty, handleClick }) {
+  // object method
   return (
     <div className={'gameboard ' + difficulty}>
       {piecelist.map((item) => (
         <Card
-          key={item[2]}
-          image={item[0]}
-          title={item[1]}
-          colorId={item[2]}
+          key={item.id}
+          image={item.img}
+          title={item.name}
+          colorId={item.id}
           handleClick={handleClick}
         />
       ))}
