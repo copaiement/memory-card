@@ -24,6 +24,14 @@
   100% { transform: rotate(360deg); }
 }
 
+.card {
+  cursor: pointer;
+}
+
+img, .cardTitle {
+  pointer-events: none;
+}
+
 .hidden {
   display: none;
 }

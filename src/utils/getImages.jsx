@@ -40,6 +40,5 @@ export async function fetchAllColors(qty) {
     // add duplicate checking??
     colorArray.push(randRGB());
   }
-  console.log(colorArray)
   return await Promise.all(colorArray.map(fetchOneColor))
 }

@@ -1,5 +1,20 @@
-having an issue with getColors.then()
+API calls working
 
-.then functions don't work out side of async call.
+Update gameplay functions:
+-Don't show all colors. Pull current colors from playable set so that 
+some are hidden at times.
+-Decide on number of visible cards at any time, given difficulty
 
-when functions are updated to call getOneColor, calls are made endlessly
+Update functions to manage clicking on colors.
+-Store clicked colors, game over if same color clicked twice
+-Flip over color cards after one is clicked, shuffle, redeal
+-Increase score on successful click
+
+Add gameover functions:
+-Clicking same card twice triggers gameover. High score is kept.
+-Modal to play again or change difficulty.
+
+// OPTIONAL
+Change Difficulty settings:
+-Easier difficulties have more variation between colors
+-Harder difficulties have more similar colors

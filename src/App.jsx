@@ -1,5 +1,5 @@
 import './App.css'
-import { useState, useQuery } from 'react'
+import { useState } from 'react'
 import { fetchAllColors } from './utils/getImages'
 import { NewGame } from './components/NewGame';
 import { Loader } from './components/Loader';
@@ -15,14 +15,11 @@ function App() {
   );
   const [status, setStatus] = useState('load');
 
-  // TESTING
- 
-
-
   async function updateColorArr(qty) {
     toggleLoader();
     let newColors = await fetchAllColors(qty);
     setColors(newColors);
+    console.log(newColors);
     setCurrScore(0);
     setStatus('play');
     toggleLoader();
@@ -34,6 +31,7 @@ function App() {
   }
 
   function handleCardClick(e) {
+    console.log(e.target.id);
 
   }
 

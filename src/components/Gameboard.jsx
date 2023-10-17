@@ -8,6 +8,7 @@ export function Gameboard({ piecelist, handleClick }) {
           key={item[2]}
           image={item[0]}
           title={item[1]}
+          colorId={item[2]}
           handleClick={handleClick}
         />
       ))}
