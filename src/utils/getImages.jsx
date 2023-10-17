@@ -1,4 +1,4 @@
-import { toggleLoader } from "./toggleloader";
+import { toggleLoader } from "./domFunctions";
 
 // Use the color API to get random colors
 // https://www.thecolorapi.com/id?rgb=rgb(255,0,0)
@@ -23,27 +23,23 @@ function getRand(min, max) {
   return Math.floor(Math.random() * (max - min) + min); 
 }
 
-async function fetchOneColor() {
-  let response = await fetch(`https://www.thecolorapi.com/id?rgb=${randRGB()}`);
-  let color = await response.json();
-  return [color.image.bare, color.name.value];
+function makeId(colorName) {
+  return colorName.replace(/\s/g, '').toLowerCase();
 }
 
-export function fetchColors(qty) {
-  toggleLoader();
+// new method
+async function fetchOneColor(rgb) {
+  let res = await fetch(`https://www.thecolorapi.com/id?rgb=${rgb}`)
+  let colorFull = await res.json();
+  return [colorFull.image.bare, colorFull.name.value, makeId(colorFull.name.value)];
+}
+
+export async function fetchAllColors(qty) {
   let colorArray = [];
-  for (let i = 0; i < qty; i++) {
-    fetchOneColor().then((color) => {
-      colorArray.push(color);
-    })
+  while (colorArray.length < qty) {
+    // add duplicate checking??
+    colorArray.push(randRGB());
   }
-
-  setTimeout(() => {
-    console.log('delay')
-    toggleLoader();
-  }, 1000)
-  
-  return colorArray;
+  console.log(colorArray)
+  return await Promise.all(colorArray.map(fetchOneColor))
 }
-
-

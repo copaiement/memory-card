@@ -1,18 +1,19 @@
-// build the main page of the game, made of multiple cards
+import { Gameboard } from "../components/Gameboard";
+import { Scoreboard } from "../components/Scoreboard";
 
-export function Gameboard({ list }) {
-
-}
-
-export function NewGame({ easyFxn, medFxn, hardFxn}) {
+// build the main page of the game, made of scoreboard and gameboard
+export function GamePage({ piecelist, score, handleClick }) {
   return (
-    <div className="newGameContainer">
-      <div className="selectMsg">Select Difficulty</div>
-      <div className="diffyBtns">
-        <button onClick={easyFxn}>Easy</button>
-        <button onClick={medFxn}>Medium</button>
-        <button onClick={hardFxn}>Hard</button>
-      </div>
+    <div className="gamePage">
+      <Scoreboard
+        score={score}
+      />
+      <Gameboard
+        piecelist={piecelist}
+        handleClick={handleClick}
+      />
     </div>
   )
 }
+
+
