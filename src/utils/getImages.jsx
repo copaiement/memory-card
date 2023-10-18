@@ -1,4 +1,4 @@
-
+import { getRand } from "./utils";
 // Use the color API to get random colors
 // https://www.thecolorapi.com/id?rgb=rgb(255,0,0)
 
@@ -13,13 +13,6 @@
 // helper functions
 function randRGB() {
   return `rgb(${getRand(0, 255)},${getRand(0, 255)},${getRand(0, 255)})`;
-}
-
-function getRand(min, max) {
-  min = Math.ceil(min);
-  // add 1 to max since random never != max
-  max = Math.floor(max + 1);
-  return Math.floor(Math.random() * (max - min) + min); 
 }
 
 function makeId(colorName) {
@@ -38,11 +31,39 @@ async function fetchOneColor(rgb) {
   };
 }
 
+// check for duplicate colors and remove
+function checkDupes(colors) {
+  const colorsArr = colors;
+  colorsArr.forEach((color) => {
+    if (colorsArr.filter((item) => item.id === color.id).length > 1) {
+      colorsArr.splice(colorsArr.indexOf(color), 1);
+    }
+  })
+
+  return colorsArr;
+}
+
 export async function fetchAllColors(qty) {
   let colorArray = [];
   while (colorArray.length < qty) {
-    // add duplicate checking??
+    //let newRGB = randRGB();
+    // reject value duplicates
+    //if (!colorArray.includes(newRGB)) colorArray.push(randRGB());
     colorArray.push(randRGB());
   }
-  return await Promise.all(colorArray.map(fetchOneColor))
+
+  // response
+  const colors = await Promise.all(colorArray.map(fetchOneColor))
+  
+  // check for duplicate color ids
+  const noDupes = checkDupes(colors);
+  while (noDupes.length < qty) {
+    console.log('DUPE')
+    noDupes.push(await fetchOneColor(randRGB()));
+    
+  }
+  console.log(colors);
+  return colors;
+
+  // return await Promise.all(colorArray.map(fetchOneColor))
 }
