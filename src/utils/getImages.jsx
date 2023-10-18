@@ -39,31 +39,26 @@ function checkDupes(colors) {
       colorsArr.splice(colorsArr.indexOf(color), 1);
     }
   })
-
   return colorsArr;
 }
 
 export async function fetchAllColors(qty) {
   let colorArray = [];
   while (colorArray.length < qty) {
-    //let newRGB = randRGB();
-    // reject value duplicates
-    //if (!colorArray.includes(newRGB)) colorArray.push(randRGB());
-    colorArray.push(randRGB());
+    let newRGB = randRGB();
+    //reject value duplicates
+    if (!colorArray.includes(newRGB)) colorArray.push(randRGB());
   }
 
   // response
   const colors = await Promise.all(colorArray.map(fetchOneColor))
   
   // check for duplicate color ids
-  const noDupes = checkDupes(colors);
+  let noDupes = checkDupes(colors);
   while (noDupes.length < qty) {
-    console.log('DUPE')
     noDupes.push(await fetchOneColor(randRGB()));
-    
+    noDupes = checkDupes(noDupes);
   }
-  console.log(colors);
+  
   return colors;
-
-  // return await Promise.all(colorArray.map(fetchOneColor))
 }
