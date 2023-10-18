@@ -1,12 +1,14 @@
 // build a card to display an image and text about the image
 
-export function Card({ flipStatus, image, title, colorId, handleClick }) {
-  if (flipStatus) {
+export function Card({ flip, image, title, colorId, handleClick }) {
+  // handle flip change
+  if (flip) {
     return (    
       <div 
         className="card flip"
       >
-        <img className="flipImage" src={image}></img>
+        <img className="cardImage" src={image}></img>
+        <div className="cardTitle">{title}</div>
       </div>
     )
   } else {

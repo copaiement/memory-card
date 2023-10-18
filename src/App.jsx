@@ -1,5 +1,5 @@
 import './App.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { fetchAllColors } from './utils/getImages'
 import { NewGame } from './components/NewGame';
 import { Loader } from './components/Loader';
@@ -27,7 +27,6 @@ function App() {
     }
   ];
   const flipTime = 1000;
-  let flip = false;
   // states
   const [colors, setColors] = useState([]);
   const [visible, setVisible] = useState([]);
@@ -37,6 +36,16 @@ function App() {
     localStorage.getItem('hiScore') || '0'
   );
   const [status, setStatus] = useState('load');
+  const [flip, setFlip] = useState(false);
+
+  // useEffect for card flip
+  useEffect(() => {
+    console.log('Flip Test');
+    setTimeout(() => {
+      setFlip(false);
+    }, flipTime)
+    console.log(flip)
+  }, [flip]);
 
   async function initializeColorArr(colorQty, visibleQty) {
     toggleLoader();
@@ -93,7 +102,7 @@ function App() {
     console.log(colors);
     console.log(difficulty);
     // make all cards not clickable and flip
-    flip = true;
+    setFlip(true);
     // check if card already clicked
     let clickedColor = colors.find((color) => color.id === e.target.id);
     if (clickedColor.clicked) {
@@ -140,7 +149,7 @@ function App() {
         />
       :
         <GamePage
-          flipStatus={flip}
+          flip={flip}
           piecelist={visible}
           currScore={currScore}
           hiScore={hiScore}
