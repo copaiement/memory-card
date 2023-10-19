@@ -19,4 +19,20 @@ export function GamePage({ flip, piecelist, currScore, hiScore, difficulty, hand
   )
 }
 
+export function GameOverPage({ status, currScore, hiScore }) {
+  return (
+    <div className="gamePage">
+      <div className="gameOver">
+        <div className="gameOverMsg">Game Over! You {status}.</div>
+        <div className="gameOverScore">Your Score: {currScore}</div>
+        {currScore === hiScore ?
+          <div className="hiScoreMsg">New High Score!</div>
+        : ''
+        }
+        <button onClick={newGame}>Play Again</button>
+      </div>
+    </div>
+  )
+}
+
 

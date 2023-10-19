@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { fetchAllColors } from './utils/getImages'
 import { NewGame } from './components/NewGame';
 import { Loader } from './components/Loader';
-import { GamePage } from './pages/GamePage';
+import { GamePage, GameOverPage } from './pages/GamePage';
 import { toggleLoader, getRand } from './utils/utils';
 // build score state here
 
@@ -140,6 +140,7 @@ function App() {
 
   return (
     <>
+      <div className='title'>Color Clicker</div>
       <Loader/>
       {status === 'load' ? 
         <NewGame
@@ -147,7 +148,7 @@ function App() {
         medFxn={() => handleNG('medium')}
         hardFxn={() => handleNG('hard')}
         />
-      :
+      : status === 'play' ?
         <GamePage
           flip={flip}
           piecelist={visible}
@@ -155,6 +156,12 @@ function App() {
           hiScore={hiScore}
           difficulty={difficulty}
           handleClick={handleCardClick}
+        />
+      :
+        <GameOverPage
+          status={status}
+          currScore={currScore}
+          hiScore={hiScore}
         />
       }
 
