@@ -1,14 +1,9 @@
 import { Gameboard } from "../components/Gameboard";
-import { Scoreboard } from "../components/Scoreboard";
 
 // build the main page of the game, made of scoreboard and gameboard
-export function GamePage({ flip, piecelist, currScore, hiScore, difficulty, handleClick }) {
+export function GamePage({ flip, piecelist, difficulty, handleClick }) {
   return (
     <div className="gamePage">
-      <Scoreboard
-        currScore={currScore}
-        hiScore={hiScore}
-      />
       <Gameboard
         flip={flip}
         piecelist={piecelist}
@@ -19,7 +14,7 @@ export function GamePage({ flip, piecelist, currScore, hiScore, difficulty, hand
   )
 }
 
-export function GameOverPage({ status, currScore, hiScore }) {
+export function GameOverPage({ status, currScore, hiScore, playAgain }) {
   return (
     <div className="gamePage">
       <div className="gameOver">
@@ -29,7 +24,7 @@ export function GameOverPage({ status, currScore, hiScore }) {
           <div className="hiScoreMsg">New High Score!</div>
         : ''
         }
-        <button onClick={newGame}>Play Again</button>
+        <button onClick={playAgain}>Play Again</button>
       </div>
     </div>
   )

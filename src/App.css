@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Cousine&family=Inter:wght@400;900&family=Tilt+Neon&display=swap');
 
-:root {
+* {
   box-sizing: border-box;
+}
+
+:root {
   font-family: 'Cousine', monospace;
   font-family: 'Inter', sans-serif;
   font-family: 'Tilt Neon', sans-serif;
@@ -20,21 +23,31 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 16px;
 }
 
 /* TITLE STYLE */
-.title {
+.titleBar {
   background: linear-gradient(-45deg, #42383577, #e209ac81, #23a5d570, #f8941277);
   background-size: 400% 400%;
-  color: white;
-  
+  width: 100%;
+  margin: 0;
   padding: 12px;
-  font-size: 24px;
-  font-weight: 900;
-  text-align: left;
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   animation: gradientMove 15s ease infinite;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: 900;
+  color: white;
+}
+
+.scoreboard {
+  color: yellow;
 }
 
 @keyframes gradientMove {
@@ -126,11 +139,24 @@ button:hover {
 }
 
 /* GAME PAGE STYLE */
+.gamePage {
+  width: min(100%, 1000px);
+  display: flex;
+  flex-direction: column;
+}
 
-/* SCOREBOARD STYLE */
-.scoreboard {
-  color: white;
-  padding-left: 12px;
+/* GAME OVER PAGE STYLE */
+.gameOver {
+  background-color: rgb(219, 232, 252);
+  width: 50%;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 18px;
+  display: flex;
+  align-self: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
 /* GAMEBOARD STYLE */
@@ -163,7 +189,6 @@ button:hover {
   border-radius: 8px;
   box-shadow: 0px 0px 10px blue;
   display: flex;
-  /* aspect-ratio: 1; */
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -184,13 +209,11 @@ button:hover {
 
 @keyframes flip {
   from {
-    scale: 1;
-    transform: rotate(0deg);
+    opacity: 1;
   }
 
   to {
-    scale: 0;
-    transform: rotate(180deg);
+    opacity: 0;
   }
 }
 
@@ -201,8 +224,22 @@ button:hover {
   box-shadow: 0px 0px 10px white;
 }
 
+.cardBG {
+  height: 100%;
+  width: 100%;
+  background-color: rgb(247, 255, 132);
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px white;
+}
+
+path {
+  fill: orange;
+}
+
 .cardTitle {
   font-size: 18px;
   padding-top: 8px;
 }
+
+
 

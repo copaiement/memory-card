@@ -2,14 +2,6 @@ import { getRand } from "./utils";
 // Use the color API to get random colors
 // https://www.thecolorapi.com/id?rgb=rgb(255,0,0)
 
-// Pick random RGB value (0 to 255)
-
-// Get images and name info from API
-
-// useEffect to do this once on load.
-
-// store colors and info in an array
-
 // helper functions
 function randRGB() {
   return `rgb(${getRand(0, 255)},${getRand(0, 255)},${getRand(0, 255)})`;

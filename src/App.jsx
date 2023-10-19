@@ -40,11 +40,9 @@ function App() {
 
   // useEffect for card flip
   useEffect(() => {
-    console.log('Flip Test');
     setTimeout(() => {
       setFlip(false);
     }, flipTime)
-    console.log(flip)
   }, [flip]);
 
   async function initializeColorArr(colorQty, visibleQty) {
@@ -68,7 +66,6 @@ function App() {
     let newVisible = [];
 
     while (newVisible.length < qty) {
-      console.log('looping');
       // pick randomly from colors and push
       let next = colors[getRand(0, (colors.length - 1))];
       if (!newVisible.includes(next)) {
@@ -91,22 +88,17 @@ function App() {
 
   function checkWin() {
     if (colors.every((color) => color.clicked === true)) {
-      console.log('winner!')
       return true
     }
     return false
   }
 
   function handleCardClick(e) {
-    console.log(e.target.id);
-    console.log(colors);
-    console.log(difficulty);
     // make all cards not clickable and flip
     setFlip(true);
     // check if card already clicked
     let clickedColor = colors.find((color) => color.id === e.target.id);
     if (clickedColor.clicked) {
-      console.log('LOSER');
       setStatus('lose'); 
     } else {
       // set color as clicked
@@ -138,9 +130,19 @@ function App() {
     setStatus('play');
   }
 
+  function playAgain() {
+    setStatus('load');
+  }
+
   return (
     <>
-      <div className='title'>Color Clicker</div>
+      <div className='titleBar'>
+        <div className='title'>Color Clicker</div>
+        <div className='scoreboard'>
+          <div className='currScore'>Current Score: {currScore}</div> 
+          <div className='hiScore'>High Score: {hiScore}</div>
+        </div>
+      </div>
       <Loader/>
       {status === 'load' ? 
         <NewGame
@@ -152,8 +154,6 @@ function App() {
         <GamePage
           flip={flip}
           piecelist={visible}
-          currScore={currScore}
-          hiScore={hiScore}
           difficulty={difficulty}
           handleClick={handleCardClick}
         />
@@ -162,6 +162,7 @@ function App() {
           status={status}
           currScore={currScore}
           hiScore={hiScore}
+          playAgain={playAgain}
         />
       }
 
